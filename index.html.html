@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Frenzy - The Ultimate Cashier Simulation Game</title>
+    <meta name="description" content="Test your speed and accuracy as a cashier in Checkout Frenzy, the addictive supermarket simulation game where every second counts!">
+    <link rel="canonical" href="https://checkoutfrenzy.online/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            blue: '#0071E3',
+                            gray: '#F5F5F7',
+                            darkgray: '#86868B',
+                            black: '#1D1D1F',
+                            white: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #FFFFFF;
+            color: #1D1D1F;
+        }
+        .apple-button {
+            background-color: #0071E3;
+            border-radius: 980px;
+            color: white;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            padding: 12px 22px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        .apple-button:hover {
+            background-color: #0077ED;
+        }
+        .game-container {
+            aspect-ratio: 16/9;
+            max-height: 80vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .game-container {
+                aspect-ratio: 16/9;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#F5F5F7]">
+    <!-- Header -->
+    <header class="w-full bg-[#F5F5F7] border-b border-gray-200">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <span class="text-2xl font-semibold text-[#0071E3]">Checkout Frenzy</span>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8">
+                    <li><a href="#play" class="text-[#1D1D1F] hover:text-[#0071E3] transition">Play Now</a></li>
+                    <li><a href="#about" class="text-[#1D1D1F] hover:text-[#0071E3] transition">About</a></li>
+                    <li><a href="#instructions" class="text-[#1D1D1F] hover:text-[#0071E3] transition">How to Play</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-xl">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="w-full bg-[#F5F5F7] py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#1D1D1F]">Checkout Frenzy</h1>
+            <p class="text-xl md:text-2xl mb-8 text-[#86868B] max-w-3xl mx-auto">Race against the clock as you scan, bag, and serve customers in this fast-paced cashier simulation!</p>
+            <a href="#play" class="apple-button inline-block">Play Now</a>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="play" class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">Play Checkout Frenzy</h2>
+            <div class="game-container w-full max-w-5xl mx-auto overflow-hidden rounded-xl bg-[#0A0A0A]">
+                <iframe src="https://cloud.onlinegames.io/games/2025/unity/checkout-frenzy/index-og.html" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">About Checkout Frenzy</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-[#EBEBEB] p-8 rounded-xl">
+                    <p class="mb-4 text-[#1D1D1F]">Checkout Frenzy puts you in the shoes of a supermarket cashier during peak shopping hours. Your goal is simple: serve as many customers as possible while maintaining accuracy and speed.</p>
+                    <p class="mb-4 text-[#1D1D1F]">As the queues grow longer and customers become more impatient, you'll need to scan items quickly, handle payments correctly, and provide excellent customer service to earn high scores and progress through increasingly challenging levels.</p>
+                    <p class="mb-4 text-[#1D1D1F]">With realistic cashier mechanics, diverse customer personalities, and unexpected events like price checks and coupon validations, Checkout Frenzy delivers an authentic and addictive retail experience that will test your multitasking abilities!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section id="instructions" class="py-16 bg-[#EBEBEB]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">How to Play</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-[#1D1D1F]">Scan Items</h3>
+                    <p class="text-[#86868B]">Click or tap on items to scan them as they come down the conveyor belt. Be careful not to miss any products!</p>
+                </div>
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-[#1D1D1F]">Process Payments</h3>
+                    <p class="text-[#86868B]">Handle different payment methods including cash, credit cards, and mobile payments. Make sure to count change correctly!</p>
+                </div>
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-[#1D1D1F]">Manage Time</h3>
+                    <p class="text-[#86868B]">Keep an eye on the queue and try to serve customers efficiently. The faster you work, the higher your score will be!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-[#F5F5F7]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">Game Features</h2>
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="bg-[#EBEBEB] p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3 text-[#1D1D1F]">Multiple Challenge Levels</h3>
+                    <p class="text-[#86868B]">Progress through increasingly difficult scenarios, from quiet morning shifts to chaotic holiday shopping rushes.</p>
+                </div>
+                <div class="bg-[#EBEBEB] p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3 text-[#1D1D1F]">Realistic Simulation</h3>
+                    <p class="text-[#86868B]">Experience authentic cashier challenges including product lookups, price checks, and handling difficult customers.</p>
+                </div>
+                <div class="bg-[#EBEBEB] p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3 text-[#1D1D1F]">Score Tracking</h3>
+                    <p class="text-[#86868B]">Compete with friends and other players to climb the global leaderboard and become the ultimate checkout champion.</p>
+                </div>
+                <div class="bg-[#EBEBEB] p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3 text-[#1D1D1F]">Skill Progression</h3>
+                    <p class="text-[#86868B]">Unlock special abilities and upgrades as you improve your cashier skills and earn experience points.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-[#EBEBEB]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">What Players Are Saying</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <p class="italic mb-4 text-[#86868B]">"I never thought being a cashier could be so fun and addictive! The gameplay is simple but challenging."</p>
+                    <p class="font-semibold text-[#1D1D1F]">- Alex J.</p>
+                </div>
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <p class="italic mb-4 text-[#86868B]">"This game gives me a new appreciation for retail workers. It's surprisingly realistic and extremely engaging!"</p>
+                    <p class="font-semibold text-[#1D1D1F]">- Madison T.</p>
+                </div>
+                <div class="bg-[#F5F5F7] p-8 rounded-xl shadow-sm">
+                    <p class="italic mb-4 text-[#86868B]">"Checkout Frenzy is my go-to game when I have a few minutes to spare. Easy to learn but hard to master!"</p>
+                    <p class="font-semibold text-[#1D1D1F]">- Chris M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1D1D1F] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-[#86868B]">&copy; 2025 Checkout Frenzy. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-[#86868B] hover:text-[#0071E3] transition">Privacy Policy</a>
+                    <a href="#" class="text-[#86868B] hover:text-[#0071E3] transition">Terms of Service</a>
+                    <a href="#" class="text-[#86868B] hover:text-[#0071E3] transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
