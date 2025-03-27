@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BF5Z48YVE2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BF5Z48YVE2');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Frenzy - Master the Cash Register Chaos!</title>
+    <meta name="description" content="Play Checkout Frenzy, the exciting cashier simulation game where you battle against time to become the ultimate checkout champion!">
+    <link rel="canonical" href="https://checkoutfrenzy.online">
+    <meta property="og:title" content="Checkout Frenzy - Master the Cash Register Chaos!">
+    <meta property="og:description" content="Battle against time in this exciting cashier simulator. Scan, bag, and make change as you face increasingly challenging customer waves!">
+    <meta property="og:url" content="https://checkoutfrenzy.online">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#4ECDC4',
+                        accent: '#FFD166',
+                        dark: '#2F4858',
+                        light: '#F7F9FB',
+                        'game-dark': '#1E293B',
+                        'game-light': '#F8FAFC',
+                    },
+                    fontFamily: {
+                        game: ['"Rubik"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239C92AC\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+        }
+        
+        .game-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #FFD166, #FF6B6B);
+            border-radius: 16px;
+            z-index: -1;
+            filter: blur(10px);
+            animation: animate 8s linear infinite;
+        }
+        
+        @keyframes animate {
+            0% {
+                filter: blur(10px) hue-rotate(0deg);
+            }
+            100% {
+                filter: blur(10px) hue-rotate(360deg);
+            }
+        }
+        
+        .pixel-corners {
+            clip-path: 
+                polygon(
+                    0px 8px,
+                    4px 8px,
+                    4px 4px,
+                    8px 4px,
+                    8px 0px,
+                    calc(100% - 8px) 0px,
+                    calc(100% - 8px) 4px,
+                    calc(100% - 4px) 4px,
+                    calc(100% - 4px) 8px,
+                    100% 8px,
+                    100% calc(100% - 8px),
+                    calc(100% - 4px) calc(100% - 8px),
+                    calc(100% - 4px) calc(100% - 4px),
+                    calc(100% - 8px) calc(100% - 4px),
+                    calc(100% - 8px) 100%,
+                    8px 100%,
+                    8px calc(100% - 4px),
+                    4px calc(100% - 4px),
+                    4px calc(100% - 8px),
+                    0px calc(100% - 8px)
+                );
+        }
+        
+        .glowing-shadow {
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5),
+                        0 0 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #FFD166;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #FF6B6B;
+        }
+        
+        .btn-game {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-game::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-game:hover::before {
+            left: 100%;
+        }
+        
+        .btn-game:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-game:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding-bottom: 75%; /* Adjusted aspect ratio for mobile */
+            }
+        }
+    </style>
+</head>
+<body class="bg-game-dark text-game-light bg-hero-pattern">
+    <div class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-4">
+                <div class="flex items-center">
+                    <div class="font-game font-bold text-3xl text-primary">
+                        <span class="text-accent">C</span>heckout <span class="text-accent">F</span>renzy
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#game" class="nav-link text-lg font-medium">Play Now</a>
+                    <a href="#about" class="nav-link text-lg font-medium">About</a>
+                    <a href="#features" class="nav-link text-lg font-medium">Features</a>
+                    <a href="#how-to-play" class="nav-link text-lg font-medium">How To Play</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none" id="mobile-menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden bg-game-dark border-t border-gray-700 py-4" id="mobile-menu">
+            <div class="container mx-auto px-4 flex flex-col space-y-4">
+                <a href="#game" class="text-lg font-medium px-4 py-2 rounded hover:bg-gray-700">Play Now</a>
+                <a href="#about" class="text-lg font-medium px-4 py-2 rounded hover:bg-gray-700">About</a>
+                <a href="#features" class="text-lg font-medium px-4 py-2 rounded hover:bg-gray-700">Features</a>
+                <a href="#how-to-play" class="text-lg font-medium px-4 py-2 rounded hover:bg-gray-700">How To Play</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="pt-24 pb-16 px-4 md:px-0">
+        <div class="container mx-auto text-center">
+            <div class="relative inline-block">
+                <h1 class="text-5xl md:text-7xl font-bold font-game mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
+                    Checkout Frenzy
+                </h1>
+                <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary"></div>
+            </div>
+            
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto mt-6 mb-8 text-gray-300">
+                Master the cash register, battle against time, and become the ultimate checkout champion!
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
+                <a href="#game" class="btn-game bg-gradient-to-r from-primary to-accent text-white font-bold text-lg py-4 px-10 rounded-lg transform transition hover:scale-105 pixel-corners">
+                    Play Now
+                </a>
+                <a href="#how-to-play" class="btn-game bg-transparent border-2 border-accent text-accent font-bold text-lg py-4 px-10 rounded-lg transform transition hover:scale-105 pixel-corners">
+                    How To Play
+                </a>
+            </div>
+            
+            <div class="mt-12 md:mt-16 relative">
+                <img src="/api/placeholder/1200/600" alt="Checkout Frenzy Game" class="w-full max-w-4xl mx-auto rounded-xl shadow-2xl pixel-corners neon-border">
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                    <div class="animate-bounce-slow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4">
+        <section id="game" class="py-24">
+            <div class="max-w-5xl mx-auto text-center">
+                <div class="inline-block mb-8 relative">
+                    <h2 class="text-4xl font-bold font-game text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                        Play Checkout Frenzy
+                    </h2>
+                    <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+                </div>
+                
+                <div class="game-container mx-auto neon-border rounded-xl overflow-hidden">
+                    <iframe 
+                        src="https://cloud.onlinegames.io/games/2025/unity/checkout-frenzy/index-og.html" 
+                        class="game-iframe" 
+                        title="Checkout Frenzy Game" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="mt-8 flex justify-center">
+                    <button class="btn-game bg-gradient-to-r from-primary to-accent text-white font-bold text-lg py-3 px-8 rounded-lg transform transition hover:scale-105 pixel-corners">
+                        Fullscreen Mode
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block mb-4 relative">
+                        <h2 class="text-4xl font-bold font-game text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                            About The Game
+                        </h2>
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+                    </div>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Enter the high-pressure world of retail checkout where every second counts!
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-8 shadow-xl pixel-corners">
+                    <div class="prose prose-lg prose-invert max-w-none">
+                        <p class="mb-4">
+                            <span class="text-primary font-bold">Checkout Frenzy</span> puts you in the shoes of a supermarket cashier during the busiest shopping hours. Your mission? Scan items, calculate totals, give correct change, and keep the customers happy as you face increasingly challenging waves of shoppers.
+                        </p>
+                        <p class="mb-4">
+                            With realistic cashier mechanics, time pressure, and a variety of customer interactions, Checkout Frenzy offers an authentic and addictive gameplay experience that tests your speed, accuracy, and multitasking abilities.
+                        </p>
+                        <p>
+                            Whether you're looking for a quick casual game or want to master the art of checkout efficiency, Checkout Frenzy provides hours of entertainment with its simple-to-learn but hard-to-master gameplay. Can you handle the pressure when the lines get long and customers get impatient?
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="text-accent text-4xl font-bold mb-2">10+</div>
+                            <div class="text-gray-400">Unique Customer Types</div>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="text-accent text-4xl font-bold mb-2">20+</div>
+                            <div class="text-gray-400">Challenging Levels</div>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="text-accent text-4xl font-bold mb-2">∞</div>
+                            <div class="text-gray-400">Hours of Fun</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-24">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-block mb-4 relative">
+                        <h2 class="text-4xl font-bold font-game text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                            Game Features
+                        </h2>
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+                    </div>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Discover what makes Checkout Frenzy an addictive retail adventure!
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Time Management</h3>
+                        <p class="text-gray-300">
+                            Race against the clock as you balance speed and accuracy. The faster you checkout customers, the higher your score!
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Progressive Difficulty</h3>
+                        <p class="text-gray-300">
+                            Start with simple transactions and advance to complex orders with coupons, discounts, and special items.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Customer Variety</h3>
+                        <p class="text-gray-300">
+                            Deal with different customer personalities, from the friendly regular to the impatient businessman.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Cash Management</h3>
+                        <p class="text-gray-300">
+                            Calculate change quickly and accurately to keep your customers satisfied and your till balanced.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Inventory Challenges</h3>
+                        <p class="text-gray-300">
+                            Manage item codes, price checks, and special promotions to maximize your checkout efficiency.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all pixel-corners">
+                        <div class="mb-4 text-accent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-primary">Achievement System</h3>
+                        <p class="text-gray-300">
+                            Unlock achievements and climb the leaderboard as you become the fastest, most accurate cashier in town.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-to-play" class="py-24">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block mb-4 relative">
+                        <h2 class="text-4xl font-bold font-game text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                            How To Play
+                        </h2>
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+                    </div>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Master these steps to become a checkout champion!
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-8 shadow-xl pixel-corners">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="relative mb-8">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">1</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Scan Items</h3>
+                                    <p class="text-gray-300">Click or tap on items to scan them. Watch for barcodes and make sure they register correctly.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative mb-8">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">2</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Apply Discounts</h3>
+                                    <p class="text-gray-300">Process coupons and special offers by entering their codes or scanning them when presented.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">3</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Calculate Totals</h3>
+                                    <p class="text-gray-300">Finalize the transaction by calculating the total amount and tax where applicable.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="relative mb-8">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">4</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Process Payment</h3>
+                                    <p class="text-gray-300">Accept cash or card payments and provide the correct change to cash-paying customers.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative mb-8">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">5</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Keep Customers Happy</h3>
+                                    <p class="text-gray-300">Monitor customer satisfaction and aim for positive feedback by being quick and accurate.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary"></div>
+                                <div class="pl-12">
+                                    <div class="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold">6</div>
+                                    <h3 class="text-xl text-primary font-bold mb-3">Level Up</h3>
+                                    <p class="text-gray-300">Complete levels to unlock new stores, items, and challenges with increasing difficulty.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 text-center">
+                        <a href="#game" class="btn-game inline-block bg-gradient-to-r from-primary to-accent text-white font-bold text-lg py-3 px-10 rounded-lg transform transition hover:scale-105 pixel-corners">
+                            Try It Now!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16">
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-gradient-to-r from-primary to-secondary rounded-xl p-12 text-center text-white shadow-2xl pixel-corners">
+                    <h2 class="text-4xl font-bold font-game mb-6">Ready For The Checkout Challenge?</h2>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">Jump into Checkout Frenzy and test your skills against the clock. Can you handle the pressure when the lines get long?</p>
+                    <a href="#game" class="btn-game inline-block bg-white text-primary font-bold text-lg py-4 px-12 rounded-lg transform transition hover:scale-105 pixel-corners">
+                        Play Checkout Frenzy Now!
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 pt-16 pb-10 border-t-4 border-primary">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="font-game font-bold text-3xl mb-6">
+                        <span class="text-accent">C</span>heckout 
+                        <span class="text-accent">F</span>renzy
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        The ultimate cashier simulation game where speed and accuracy make you a champion!
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.292h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 text-center md:text-left">Navigation</h3>
+                    <ul class="space-y-3 text-center md:text-left">
+                        <li><a href="#game" class="text-gray-400 hover:text-accent transition-colors">Play Game</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent transition-colors">About</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-accent transition-colors">Features</a></li>
+                        <li><a href="#how-to-play" class="text-gray-400 hover:text-accent transition-colors">How To Play</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 text-center md:text-left">Contact</h3>
+                    <ul class="space-y-3 text-center md:text-left">
+                        <li class="flex items-center justify-center md:justify-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:info@checkoutfrenzy.online" class="text-gray-400 hover:text-accent transition-colors">info@checkoutfrenzy.online</a>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <a href="#" class="text-gray-400 hover:text-accent transition-colors">Support</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 text-center md:text-left">Newsletter</h3>
+                    <p class="text-gray-400 mb-4 text-center md:text-left">Subscribe for updates and exclusive offers!</p>
+                    <form class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-white">
+                        <button type="submit" class="bg-primary hover:bg-opacity-80 text-white font-medium rounded-lg px-4 py-2 transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">&copy; 2025 Checkout Frenzy. All rights reserved.</p>
+                <div class="flex justify-center space-x-8 mt-4">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-gray-900', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-gray-900', 'shadow-lg');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
